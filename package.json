@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/carrymycross7/pwa-pokemon-team-builder/issues"
   },
-  "homepage": "https://github.com/carrymycross7/pwa-pokemon-team-builder#readme"
+  "homepage": "https://github.com/carrymycross7/pwa-pokemon-team-builder#readme",
+  "dependencies": {
+    "angular": "^1.8.3",
+    "angular-selectize2": "^1.2.3",
+    "lodash": "^4.17.21"
+  }
 }
