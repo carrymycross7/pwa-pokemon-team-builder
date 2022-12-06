@@ -1,0 +1,24 @@
+{
+  "name": "pwa-pokemon-team-builder",
+  "version": "1.0.0",
+  "description": "\"# pwa-pokemon-team-builder\"",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carrymycross7/pwa-pokemon-team-builder.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/carrymycross7/pwa-pokemon-team-builder/issues"
+  },
+  "homepage": "https://github.com/carrymycross7/pwa-pokemon-team-builder#readme",
+  "dependencies": {
+    "angular": "^1.8.3",
+    "angular-selectize2": "^1.2.3",
+    "lodash": "^4.17.21"
+  }
+}
