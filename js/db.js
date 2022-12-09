@@ -1,7 +1,9 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
 import {
+    doc,
     getFirestore,
     collection,
+    deleteDoc,
     getDocs,
     onSnapshot,
 } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
@@ -60,8 +62,21 @@ async function getTypes(db) {
 
 const unsub = onSnapshot(collection(db, "types"), (doc) => {
     //   console.log(doc.docChanges());
-    doc.docChanges().forEach((change) => {
+    doc.docChanges().forEach(async (change) => {
         // console.log(change, change.doc.data(), change.doc.id);
+        console.dir(change); // debug - remove
         console.dir(change.doc.data()); // debug - remove
+        if(change.type == 'added') {
+           assignTypes(change.doc.data());
+        }
     });
+});
+
+
+const typesDelete = document.querySelector(".remove");
+typesDelete.addEventListener("click", (event) => {
+    const name = document.getElementById('rt_name');
+    deleteDoc(doc(db, "types", name.value));
+    console.dir(name.value); // debug - remove
+    console.dir(event); // debug - remove
 });

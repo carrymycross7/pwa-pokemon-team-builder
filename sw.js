@@ -7,6 +7,7 @@ const assets = [
     "/index.html",
     "/js/app.js",
     "/js/builder.js",
+    "/js/angular-selectize.js",
     "/js/materialize.min.js",
     "/css/app.css",
     "/css/materialize.min.css",
