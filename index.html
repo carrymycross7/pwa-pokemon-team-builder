@@ -5,6 +5,7 @@
   <title>Title</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/app.css"/>
   <link rel="stylesheet" href="/css/types-standard.css"/>
   <link rel="stylesheet" href="/css/selectize.css"/>
   
@@ -38,7 +39,7 @@
 
 <div id="modal1" class="modal">
   <div class="modal-content">
-    <h4>Add a new type</h4>
+    <h4>Add or Update a type</h4>
     <form>
       <div class="form-group">
         <label for="nt_name">Name:</label>
@@ -56,7 +57,7 @@
         <label for="nt_weak">Weaknesses:</label>
         <input placeholder="eg: Fire,Water (Must be comma separated)" ng-model="vm.edit.new_type.weaknesses" type="text" class="form-control" id="nt_weak">
       </div>
-      <button ng-click="vm.edit.new_type.add();" type="submit" class="btn btn-default">Submit</button>
+      <button ng-click="vm.watchTypes();"  type="submit" class="btn btn-default add">Submit</button>
     </form>
   </div>
 </div>
@@ -94,7 +95,7 @@
         <label for="ut_weak">Weaknesses:</label>
         <input placeholder="eg: Fire,Water (Must be comma separated)" ng-model="vm.edit.update_type.weaknesses" type="text" class="form-control" id="ut_weak">
       </div>
-      <button ng-click="vm.edit.update_type.update();" type="submit" class="btn btn-default">Submit</button>
+      <button ng-click="vm.watchTypes();"  type="submit" class="btn btn-default add">Submit</button>
     </form>
   </div>
 </div>
@@ -160,7 +161,7 @@
       <selectize
           ng-model="vm.pokemon_one.type_search"
           config="vm.pokemon_one.config"
-          options='vm.p_one.types'
+          options='vm.pokemon_one.types'
       ></selectize></div>
     <div class="col s2"><img src="../img/pokeball.png" alt="Girl in a jacket" ><selectize
         ng-model="vm.pokemon_two.type_search"
@@ -192,7 +193,7 @@
 
 <section>
   <div class="row">
-    <div class="col s2"><button class="btn btn-warning" ng-click="vm.calculateWeakness()">Calculate Weaknesses</button></div>
+    <div class="col s2"><button class="btn btn-warning" ng-click="vm.calculateWeaknesses()">Calculate Weaknesses</button></div>
     <div class="col s2"><button data-toggle="modal" data-target="#modal1" style="background-color: blue" class="btn" >Add New Type</button></div>
     <div class="col s2"><button data-toggle="modal" data-target="#modal2" style="background-color: red" class="btn" >Remove a Type</button></div>
     <div class="col s2"><button data-toggle="modal" data-target="#modal3" style="background-color: coral" class="btn" >Update a Type</button></div>
