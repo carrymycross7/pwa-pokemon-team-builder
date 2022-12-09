@@ -1,10 +1,12 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
 import {
+    addDoc,
     doc,
     getFirestore,
     collection,
     deleteDoc,
     getDocs,
+    setDoc,
     onSnapshot,
 } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
 
@@ -42,8 +44,8 @@ const firebaseConfig = {
 
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+const application = initializeApp(firebaseConfig);
+const db = getFirestore(application);
 
 console.dir(db); // debug - remove
 
@@ -52,9 +54,37 @@ async function getTypes(db) {
     const typesCol = collection(db, 'types');
     const typeSnapshot = await getDocs(typesCol);
     const typesList = typeSnapshot.docs.map((doc) => doc.data());
-
+    
     return typesList;
 }
+
+const typesUpdate = document.querySelector(".add");
+typesUpdate.addEventListener("click", async (event) => {
+    let params = {
+        type: '',
+        resistances: '',
+        strengths: '',
+        weaknesses: '',
+        
+    }
+    event.preventDefault();
+    try {
+        params.type = document.getElementById('nt_name').value;
+        params.resistances = document.getElementById('nt_res').value.split(',');
+        params.strengths = document.getElementById('nt_str').value.split(',');
+        params.weaknesses = document.getElementById('nt_weak').value.split(',');
+    
+        await setDoc(doc(db, "types", params.type), params).catch((error) => console.log(error));
+        params.name = "";
+        params.resistances = "";
+        params.strengths = "";
+        params.weaknesses = "";
+        
+    }catch (e) {
+        console.dir(e);
+    }
+    
+});
 
 // let list = await getTypes(db);
 //
@@ -63,11 +93,8 @@ async function getTypes(db) {
 const unsub = onSnapshot(collection(db, "types"), (doc) => {
     //   console.log(doc.docChanges());
     doc.docChanges().forEach(async (change) => {
-        // console.log(change, change.doc.data(), change.doc.id);
-        console.dir(change); // debug - remove
-        console.dir(change.doc.data()); // debug - remove
         if(change.type == 'added') {
-           assignTypes(change.doc.data());
+            assignTypes(change.doc.data());
         }
     });
 });
@@ -77,6 +104,6 @@ const typesDelete = document.querySelector(".remove");
 typesDelete.addEventListener("click", (event) => {
     const name = document.getElementById('rt_name');
     deleteDoc(doc(db, "types", name.value));
-    console.dir(name.value); // debug - remove
-    console.dir(event); // debug - remove
 });
+
+

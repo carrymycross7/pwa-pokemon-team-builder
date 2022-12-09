@@ -1,57 +1,52 @@
 let counter = 1;
+
 function assignTypes (new_type) {
+    console.dir(new_type); // debug - remove
     new_type.id = counter++;
-    p_one.types.push(new_type)
+    p_1.types.push(new_type);
+    p_2.types.push(new_type);
+    p_3.types.push(new_type);
+    p_4.types.push(new_type);
+    p_5.types.push(new_type);
+    p_6.types.push(new_type);
 }
 
-let selectize_inputs = {
-    1: {selectize: {}, options: []},
-    2: {selectize: {}, options: []},
-    3: {selectize: {}, options: []},
-    4: {selectize: {}, options: []},
-    5: {selectize: {}, options: []},
-    6: {selectize: {}, options: []}
-};
+function styleSelectizeOptions(option) {
+    option[0].classList.add(option[0].firstChild.data.toLowerCase());
+}
 
-let p_one = {
+let selectize_obj = {
     config: {
         create: false,
         delimiter: '|',
-        valueField: 'id',
-        labelField: 'name',
-        searchField: 'name',
+        valueField: 'type',
+        labelField: 'type',
+        searchField: 'type',
         maxItems: 2,
         plugins: ['remove_button'],
-        onType: function (value, $item){
-            console.dir(value);
-            console.dir($item);
-            console.dir(p_one.types); // debug - remove
-        },
-        onOptionAdd: function (value) {
-            console.dir(value); // debug - remove
-        },
         onInitialize: function (selectize){
-            console.dir(selectize); // debug - remove
             // store all the selectize properties
-            selectize_inputs[1].selectize = selectize;
-            selectize_inputs[1].options = selectize.options;
+            // selectize_inputs[1].selectize = selectize;
+            // selectize_inputs[1].options = selectize.options;
         },
         onItemAdd: function(value, $item) {
-            console.dir(value); // debug - remove
-            // styleSelectizeOptions($item);
-            // populateTypeChoices(1, $item);
-        },
-        onItemRemove: function (value,$item) {
-            // removeTypeChoices(1, $item);
-            // console.dir(data.type_choices);
+            styleSelectizeOptions($item);
         }
     },
     types: [],
     type_search: [],
 };
 
+let p_1 = _.cloneDeep(selectize_obj);
+let p_2 = _.cloneDeep(selectize_obj);
+let p_3 = _.cloneDeep(selectize_obj);
+let p_4 = _.cloneDeep(selectize_obj);
+let p_5 = _.cloneDeep(selectize_obj);
+let p_6 = _.cloneDeep(selectize_obj);
 
-(function (window, types,p_one) {
+
+
+(function (window,types,p_1,p_2,p_3,p_4,p_5,p_6) {
     console.dir(types); // debug - remove
     function pageCtrl ($scope, $http, $document, $timeout) {
         console.dir(types); // debug - remove
@@ -136,147 +131,18 @@ let p_one = {
             6: {selectize: {}, options: []}
         };
     
-        let pokemon_one = p_one;
-    
-        let pokemon_two = {
-            config: {
-                create: false,
-                delimiter: '/',
-                valueField: 'id',
-                labelField: 'type',
-                searchField: 'type',
-                maxItems: 2,
-                plugins: ['remove_button'],
-                onInitialize: function (selectize){
-                    // store all the selectize properties
-                    selectize_inputs[2].selectize = selectize;
-                    selectize_inputs[2].options = selectize.options;
-                },
-                onItemAdd: function(value, $item) {
-                    styleSelectizeOptions($item);
-                    populateTypeChoices(2, $item);
-                },
-                onItemRemove: function (value,$item) {
-                    removeTypeChoices(2, $item);
-                }
-            },
-            types: [],
-            type_search: [],
-        };
-    
-        let pokemon_three = {
-            config: {
-                create: false,
-                delimiter: '/',
-                valueField: 'id',
-                labelField: 'name',
-                searchField: 'name',
-                maxItems: 2,
-                plugins: ['remove_button'],
-                onInitialize: function (selectize){
-                    // store all the selectize properties
-                    selectize_inputs[3].selectize = selectize;
-                    selectize_inputs[3].options = selectize.options;
-                },
-                onItemAdd: function(value, $item) {
-                    styleSelectizeOptions($item);
-                    populateTypeChoices(3, $item);
-                },
-                onItemRemove: function (value,$item) {
-                    removeTypeChoices(3, $item);
-                }
-            },
-            types: [],
-            type_search: [],
-        };
-    
-        let pokemon_four = {
-            config: {
-                create: false,
-                delimiter: '/',
-                valueField: 'id',
-                labelField: 'name',
-                searchField: 'name',
-                maxItems: 2,
-                plugins: ['remove_button'],
-                onInitialize: function (selectize){
-                    // store all the selectize properties
-                    selectize_inputs[4].selectize = selectize;
-                    selectize_inputs[4].options = selectize.options;
-                },
-                onItemAdd: function(value, $item) {
-                    styleSelectizeOptions($item);
-                    populateTypeChoices(4, $item);
-                },
-                onItemRemove: function (value,$item) {
-                    removeTypeChoices(4, $item);
-                }
-            },
-            types: [],
-            type_search: [],
-        };
-    
-        let pokemon_five = {
-            config: {
-                create: false,
-                delimiter: '/',
-                valueField: 'id',
-                labelField: 'name',
-                searchField: 'name',
-                maxItems: 2,
-                plugins: ['remove_button'],
-                onInitialize: function (selectize){
-                    // store all the selectize properties
-                    selectize_inputs[5].selectize = selectize;
-                    selectize_inputs[5].options = selectize.options;
-                },
-                onItemAdd: function(value, $item) {
-                    styleSelectizeOptions($item);
-                    populateTypeChoices(5, $item);
-                },
-                onItemRemove: function (value,$item) {
-                    removeTypeChoices(5, $item);
-                }
-            },
-            types: [],
-            type_search: [],
-        };
-    
-        let pokemon_six = {
-            config: {
-                create: false,
-                delimiter: '/',
-                valueField: 'id',
-                labelField: 'name',
-                searchField: 'name',
-                maxItems: 2,
-                plugins: ['remove_button'],
-                onInitialize: function (selectize){
-                    // store all the selectize properties
-                    selectize_inputs[6].selectize = selectize;
-                    selectize_inputs[6].options = selectize.options;
-                },
-                onItemAdd: function(value, $item) {
-                    styleSelectizeOptions($item);
-                    populateTypeChoices(6, $item);
-                },
-                onItemRemove: function (value,$item) {
-                    removeTypeChoices(6, $item);
-                }
-            },
-            types: [],
-            type_search: [],
-        };
-    
-        function addTypeEverywhere (type) {
-            pokemon_one.types.push(type);
-            pokemon_two.types.push(type);
-            pokemon_three.types.push(type);
-            pokemon_four.types.push(type);
-            pokemon_five.types.push(type);
-            pokemon_six.types.push(type);
+        let pokemon_one = p_1;
+        let pokemon_two = p_2;
+        let pokemon_three = p_3;
+        let pokemon_four = p_4;
+        let pokemon_five = p_5;
+        let pokemon_six = p_6;
+        
+        function calculateWeaknesses() {
+            console.dir(pokemon_one); // debug - remove
+            let first = pokemon_one.type_search[0];
+            console.dir(pokemon_one.types.find((t) => t.type == first));
         }
-    
     
         /*
             Function populates the array associated with the number passed in.
@@ -316,29 +182,36 @@ let p_one = {
             option[0].classList.add(option[0].firstChild.data.toLowerCase());
         }
         
+        function watchTypes () {
+            $timeout(function () {
+                init();
+            }, 2000);
+        }
+        
         function _test (data) {
         }
         
         function init() {
-            console.dir(pokemon_one); // debug
         }
     
         // init the page
         angular.element(document).ready(async function () {
             $timeout(function () {
                 init();
-            }, 5000);
+            }, 2000);
         });
         return {
             _test,
+            calculateWeaknesses,
             edit,
-            p_one,
+            p_1,
             pokemon_one,
             pokemon_two,
             pokemon_three,
             pokemon_four,
             pokemon_five,
             pokemon_six,
+            watchTypes
         }
     }
     let app = angular.module('pageApp', ['selectize']);
@@ -348,5 +221,6 @@ let p_one = {
         '$document',
         '$timeout',
         pageCtrl]);
+    
    
-})(window, [],p_one)
+})(window,[],p_1,p_2,p_3,p_4,p_5,p_6)
