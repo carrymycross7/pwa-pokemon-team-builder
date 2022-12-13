@@ -138,10 +138,41 @@ let p_6 = _.cloneDeep(selectize_obj);
         let pokemon_five = p_5;
         let pokemon_six = p_6;
         
+        let weaknesses_one = {
+            config: {
+                create: false,
+                delimiter: '|',
+                valueField: 'type',
+                labelField: 'type',
+                searchField: 'type',
+                plugins: [],
+                onInitialize: function (selectize){
+                    // store all the selectize properties
+                    // selectize_inputs[1].selectize = selectize;
+                    // selectize_inputs[1].options = selectize.options;
+                },
+                onItemAdd: function(value, $item) {
+                    styleSelectizeOptions($item);
+                }
+            },
+            types: p_1.types,
+            type_search: [],
+        };
+        
         function calculateWeaknesses() {
-            console.dir(pokemon_one); // debug - remove
-            let first = pokemon_one.type_search[0];
-            console.dir(pokemon_one.types.find((t) => t.type == first));
+            let first = pokemon_one.type_search[0], second = pokemon_one.type_search[1] ? pokemon_one.type_search[1] : null;
+            let first_pokemon = pokemon_one.types.find((t) => t.type == first);
+            let second_pokemon = null;
+            if (second) second_pokemon = pokemon_one.types.find((t) => t.type == second)
+            let found_weaknesses = _.cloneDeep(first_pokemon.weaknesses);
+            if (second_pokemon) {
+                for (let r of second_pokemon.resistances) {
+                    _.remove(found_weaknesses, (w) => {
+                        return w === r;
+                    });
+                }
+            }
+            weaknesses_one.type_search = _.cloneDeep(found_weaknesses);
         }
     
         /*
@@ -192,6 +223,7 @@ let p_6 = _.cloneDeep(selectize_obj);
         }
         
         function init() {
+            weaknesses_one.types = _.cloneDeep(p_1.types);
         }
     
         // init the page
@@ -211,7 +243,8 @@ let p_6 = _.cloneDeep(selectize_obj);
             pokemon_four,
             pokemon_five,
             pokemon_six,
-            watchTypes
+            watchTypes,
+            weaknesses_one
         }
     }
     let app = angular.module('pageApp', ['selectize']);
